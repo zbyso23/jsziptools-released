@@ -148,7 +148,7 @@ exports.stringToBytes = stringToBytes;
  * });
  */
 function bytesToString(bytes, encoding = 'UTF-8') {
-    return exports.readFileAsText(new Blob([toBytes(bytes)]), encoding);
+    return exports.readFileAsText(new Blob([bytes]), encoding);
 }
 exports.bytesToString = bytesToString;
 /**

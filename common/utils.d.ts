@@ -48,7 +48,7 @@ export declare function stringToBytes(str: string): Uint8Array;
  *     console.log(str);
  * });
  */
-export declare function bytesToString(bytes: BufferLike, encoding?: string): Promise<string>;
+export declare function bytesToString(bytes: Uint8Array, encoding?: string): Promise<string>;
 /**
  * Converts Uint8Array to a string. You can use it only a worker process.
  *

@@ -75,11 +75,12 @@ class ZipArchiveReader {
                 (header.fileNameAsBytes[header.fileNameAsBytes.length - 1] !== 47 ? files : folders).push(header);
             });
             // detect encoding. cp932 or utf-8.
-            if (this.encoding == null) {
-                this.encoding = common_1.detectEncoding(common_1.concatBytes(localFileHeaders.slice(0, 100).map(header => header.fileNameAsBytes)));
+            let encoding = this.encoding;
+            if (encoding == null) {
+                encoding = common_1.detectEncoding(common_1.concatBytes(localFileHeaders.slice(0, 100).map(header => header.fileNameAsBytes)));
             }
             yield Promise.all(localFileHeaders.map(h => {
-                return common_1.bytesToString(h.fileNameAsBytes, this.encoding).then(s => (h.fileName = s));
+                return common_1.bytesToString(h.fileNameAsBytes, encoding).then(s => (h.fileName = s));
             }));
             return this;
         });

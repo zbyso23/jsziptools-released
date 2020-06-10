@@ -88,7 +88,7 @@ class ZipBlobArchiveReader extends zip_archive_reader_1.ZipArchiveReader {
                 localFileHeaders.push(header);
                 if (!progressCallback)
                     continue;
-                let progress = offset / offsetTotal;
+                let progress = Math.floor((offset / offsetTotal) * 100);
                 if (lastProgress === progress)
                     continue;
                 progressCallback({ progress });
