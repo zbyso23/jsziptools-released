@@ -34,7 +34,7 @@ class ZipBufferArchiveReader extends zip_archive_reader_1.ZipArchiveReader {
         let folders = [];
         let offset = bytes.byteLength - 4;
         let view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
-        const minTime = new common_1.MinTime();
+        const minTime = new common_1.MinTime(20);
         this.files = files;
         this.folders = folders;
         this.localFileHeaders = localFileHeaders;
@@ -79,6 +79,8 @@ class ZipBufferArchiveReader extends zip_archive_reader_1.ZipArchiveReader {
             progressCallback({ progress, debug: `Array` });
             lastProgress = progress;
         }
+        if (progressCallback)
+            progressCallback({ progress: Math.floor((offset / offsetTotal) * 100) });
         return this._completeInit();
     }
     _decompressFile(fileName) {

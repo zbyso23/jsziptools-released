@@ -30,7 +30,6 @@ class ZipBlobArchiveReader extends zip_archive_reader_1.ZipArchiveReader {
             let files = [];
             let folders = [];
             let offset;
-            const minTime = new common_1.MinTime();
             let readChunk = (start, end) => common_1.readFileAsArrayBuffer(blob.slice(start, end));
             this.files = files;
             this.folders = folders;
@@ -87,7 +86,7 @@ class ZipBlobArchiveReader extends zip_archive_reader_1.ZipArchiveReader {
                 header.compsize = centralDirHeaders[i].compsize;
                 header.uncompsize = centralDirHeaders[i].uncompsize;
                 localFileHeaders.push(header);
-                if (!progressCallback || !minTime.is())
+                if (!progressCallback)
                     continue;
                 let progress = Math.floor((offset / offsetTotal) * 100);
                 if (lastProgress === progress)
