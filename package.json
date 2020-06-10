@@ -1,0 +1,46 @@
+{
+  "name": "jsziptools",
+  "version": "3.0.0-rc4",
+  "description": "It's a utility of zlib, gzip and zip format binary data.",
+  "main": "./jsziptools.min.js",
+  "types": "./index.d.ts",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "testem",
+    "build:browser": "webpack --mode production",
+    "build:npm": "tsc -d --outDir dist-release",
+    "build:test": "webpack --mode production --config webpack.config.test.js",
+    "release": "npm run build:test && npm test -- ci && npm run build:browser && npm run build:npm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zbyso23/jsziptools.git"
+  },
+  "keywords": [
+    "zip",
+    "gz",
+    "zlib"
+  ],
+  "author": "Syu Kato",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zbyso23/jsziptools/issues"
+  },
+  "devDependencies": {
+    "@types/chai": "3.4.30",
+    "@types/mocha": "2.2.29",
+    "license-info-webpack-plugin": "1.0.0",
+    "testem": "1.10.3",
+    "ts-loader": "4.1.0",
+    "typescript": "2.7.2",
+    "uglifyjs-webpack-plugin": "1.2.4",
+    "webpack": "4.1.1",
+    "webpack-cli": "2.0.12"
+  },
+  "dependencies": {
+    "zlib-asm": "1.0.7"
+  }
+}
