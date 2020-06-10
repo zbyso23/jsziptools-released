@@ -76,7 +76,7 @@ class ZipBufferArchiveReader extends zip_archive_reader_1.ZipArchiveReader {
             let progress = Math.floor((offset / offsetTotal) * 100);
             if (lastProgress === progress)
                 continue;
-            progressCallback({ progress, debug: `Array` });
+            progressCallback({ progress });
             lastProgress = progress;
         }
         if (progressCallback)
