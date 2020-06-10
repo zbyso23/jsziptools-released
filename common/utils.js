@@ -225,3 +225,21 @@ function concatBytes(_buffers) {
     return ret;
 }
 exports.concatBytes = concatBytes;
+/**
+ * MinTime
+ */
+class MinTime {
+    constructor(msMin = 250) {
+        this.msMin = msMin;
+        this.msLast = (new Date()).getTime();
+    }
+    is() {
+        const msNow = (new Date()).getTime();
+        if ((msNow - this.msLast) >= this.msMin) {
+            this.msLast = msNow;
+            return true;
+        }
+        return false;
+    }
+}
+exports.MinTime = MinTime;

@@ -34,6 +34,7 @@ class ZipBufferArchiveReader extends zip_archive_reader_1.ZipArchiveReader {
         let folders = [];
         let offset = bytes.byteLength - 4;
         let view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+        const minTime = new common_1.MinTime();
         this.files = files;
         this.folders = folders;
         this.localFileHeaders = localFileHeaders;
@@ -70,7 +71,7 @@ class ZipBufferArchiveReader extends zip_archive_reader_1.ZipArchiveReader {
             localFileHeader.compsize = centralDirHeaders[i].compsize;
             localFileHeader.uncompsize = centralDirHeaders[i].uncompsize;
             localFileHeaders.push(localFileHeader);
-            if (!progressCallback)
+            if (!progressCallback || !minTime.is())
                 continue;
             let progress = Math.floor((offset / offsetTotal) * 100);
             if (lastProgress === progress)

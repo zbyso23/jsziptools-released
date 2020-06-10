@@ -89,3 +89,12 @@ export declare function load(...urls: string[]): Promise<Uint8Array[]>;
  */
 export declare function concatBytes(buffers: (Uint8Array | ArrayBuffer)[]): Uint8Array;
 export declare function concatBytes(...buffers: (Uint8Array | ArrayBuffer)[]): Uint8Array;
+/**
+ * MinTime
+ */
+export declare class MinTime {
+    protected msMin: number;
+    protected msLast: number;
+    constructor(msMin?: number);
+    is(): boolean;
+}
