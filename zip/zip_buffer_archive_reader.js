@@ -60,6 +60,9 @@ class ZipBufferArchiveReader extends zip_archive_reader_1.ZipArchiveReader {
             offset += centralDirHeader.allsize;
         }
         // read local file headers.
+        const offsetTotal = bytes.byteLength;
+        let lastProgress = 0;
+        const progressCallback = this.progressCallback;
         for (i = 0; i < n; ++i) {
             offset = centralDirHeaders[i].headerpos;
             localFileHeader = zip_archive_reader_1.readLocalFileHeader(this.bytes.buffer, this.bytes.byteOffset + offset);
@@ -67,6 +70,13 @@ class ZipBufferArchiveReader extends zip_archive_reader_1.ZipArchiveReader {
             localFileHeader.compsize = centralDirHeaders[i].compsize;
             localFileHeader.uncompsize = centralDirHeaders[i].uncompsize;
             localFileHeaders.push(localFileHeader);
+            if (!progressCallback)
+                continue;
+            let progress = Math.floor((offset / offsetTotal) * 100);
+            if (lastProgress === progress)
+                continue;
+            progressCallback({ progress, debug: `Array` });
+            lastProgress = progress;
         }
         return this._completeInit();
     }
